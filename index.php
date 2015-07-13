@@ -5,7 +5,7 @@
 //generates random number and displays range for guess
 //calls guess() with randomNumber passed to it
 function playGame(){
-	$randomNumber = rand(1, 100);
+	$randomNumber = mt_rand(1, 100);
 	fwrite(STDOUT, "Guess a number between 1 and 100.\n");
 	//keeps track of user guesses
 	$guessNumber = 0;
