@@ -7,28 +7,31 @@
 function playGame(){
 	$randomNumber = rand(1, 100);
 	fwrite(STDOUT, "Guess a number between 1 and 100.\n");
-	guess($randomNumber);
+	$guessNumber = 0;
+	guess($randomNumber, $guessNumber);
 }
 //asks for guess and compares to the random number that was 
 //passed to it and then calls response with
 //the parameters of the random number and the user number
-function guess($randomNumber){
+function guess($randomNumber, $guessNumber){
 	fwrite(STDOUT, 'Guess? ');
 	$userNumber = fgets(STDIN);
-	response($randomNumber, $userNumber);
+	$guessNumber++;
+	response($randomNumber, $userNumber, $guessNumber);
 }
 //compares guess to number and responds with higher or lower
 //if guess is correct, asks if user wants to play again
-function response($randomNumber, $userNumber){
+function response($randomNumber, $userNumber, $guessNumber){
 		if($randomNumber < $userNumber){
 			fwrite(STDOUT, "LOWER\n");
-			guess($randomNumber);
+			guess($randomNumber, $guessNumber);
 		}else if($randomNumber > $userNumber){
 			fwrite(STDOUT, "HIGHER\n");
-			guess($randomNumber);
+			guess($randomNumber, $guessNumber);
 		}
 		else{
 			fwrite(STDOUT, "GOOD GUESS!\n");
+			fwrite(STDOUT, "You guessed the number in {$guessNumber} guesses.\n");
 			//check to see if user wants to play again
 			fwrite(STDOUT, 'Play Again? (y/n): ');
 			//trim removes the enter key and spaces
