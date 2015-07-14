@@ -4,18 +4,20 @@
 
 //generates random number and displays range for guess
 //calls guess() with randomNumber passed to it
-if ($argc == 1){
-	fwrite(STDOUT, "Enter min value: \n");
-	$min = (int)fgets(STDIN);
-	fwrite(STDOUT, "Enter max value: \n");
-	$max = (int)fgets(STDIN);
+if ($argc == 1 || !($argv[1] < $argv[2])){
+	do{
+		fwrite(STDOUT, "Enter min value: \n");
+		$min = (int)fgets(STDIN);
+		fwrite(STDOUT, "Enter max value: \n");
+		$max = (int)fgets(STDIN);
+	}while(!($min < $max));	
 }else{
 	$min = (int)$argv[1];
 	$max = (int)$argv[2];	
 }
 function playGame($min, $max){
 	$randomNumber = mt_rand($min, $max);
-	fwrite(STDOUT, "Guess a number between 1 and 100.\n");
+	fwrite(STDOUT, "Guess a number between $min and $max.\n");
 	//keeps track of user guesses
 	$guessNumber = 0;
 	guess($randomNumber, $guessNumber, $min, $max);
